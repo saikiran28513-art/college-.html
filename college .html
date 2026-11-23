@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EduCore | College Management Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #5145cd;
+    --dark: #171936;
+    --muted: #777b92;
+    --bg: #f6f7fc;
+    --white: #ffffff;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+}
+
+button, input, select {
+    font-family: inherit;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 7%;
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 3px 20px #1719360c;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--primary);
+    font-family: Manrope, sans-serif;
+}
+
+.logo span {
+    color: var(--dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 27px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #60647b;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 9px;
+    padding: 13px 22px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.btn:hover {
+    background: #3930a7;
+    transform: translateY(-2px);
+}
+
+.hero {
+    padding: 85px 7%;
+    background: linear-gradient(120deg,#eeedff,#f9faff);
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.eyebrow {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-family: Manrope, sans-serif;
+    font-size: clamp(38px,5vw,63px);
+    line-height: 1.13;
+    margin-bottom: 22px;
+}
+
+.hero h1 span {
+    color: var(--primary);
+}
+
+.hero p {
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 510px;
+    margin-bottom: 28px;
+}
+
+.hero-image {
+    height: 390px;
+    position: relative;
+    border-radius: 23px;
+    overflow: hidden;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-label {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 17px 22px;
+    border-radius: 12px;
+    font-weight: 700;
+    box-shadow: 0 5px 25px #0002;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 18px;
+    padding: 35px 7%;
+    background: white;
+}
+
+.stat strong {
+    display: block;
+    color: var(--primary);
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.stat small {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+section {
+    padding: 75px 7%;
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.heading h2 {
+    font-family: Manrope, sans-serif;
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.heading p {
+    color: var(--muted);
+}
+
+.departments {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.dept-card {
+    background: white;
+    border: 1px solid #e9e9f1;
+    padding: 27px;
+    border-radius: 16px;
+    transition: .3s;
+}
+
+.dept-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 35px #17193612;
+}
+
+.dept-icon {
+    height: 55px;
+    width: 55px;
+    display: grid;
+    place-items: center;
+    border-radius: 14px;
+    background: #eeedff;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.dept-card h3 {
+    margin-bottom: 10px;
+}
+
+.dept-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.dept-card a {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.faculty-section {
+    background: #efeffa;
+}
+
+.faculty-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 22px;
+}
+
+.faculty-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    text-align: center;
+    padding-bottom: 22px;
+    transition: .3s;
+}
+
+.faculty-card:hover {
+    transform: translateY(-5px);
+}
+
+.faculty-card img {
+    width: 100%;
+    height: 205px;
+    object-fit: cover;
+}
+
+.faculty-card h3 {
+    font-size: 16px;
+    margin-top: 17px;
+}
+
+.faculty-card p {
+    color: var(--primary);
+    font-size: 13px;
+    font-weight: 600;
+    margin-top: 7px;
+}
+
+.students-section {
+    background: white;
+}
+
+.search-area {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.search-area input,
+.search-area select {
+    padding: 14px 17px;
+    border: 1px solid #e0e0eb;
+    background: white;
+    border-radius: 9px;
+    outline: none;
+}
+
+.search-area input {
+    width: min(350px,100%);
+}
+
+.student-table {
+    overflow-x: auto;
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #e8e8ef;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+th, td {
+    padding: 18px 22px;
+    text-align: left;
+    border-bottom: 1px solid #eeeef3;
+    font-size: 14px;
+}
+
+th {
+    background: #f6f5ff;
+    color: var(--primary);
+}
+
+td {
+    color: #555a70;
+}
+
+.status {
+    background: #e2f8ec;
+    color: #21864d;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.events {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.event-card {
+    background: white;
+    padding: 26px;
+    border-radius: 15px;
+    border: 1px solid #ececf3;
+}
+
+.event-date {
+    background: #eeedff;
+    color: var(--primary);
+    display: inline-block;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.event-card h3 {
+    margin-bottom: 12px;
+}
+
+.event-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.event-card button {
+    margin-top: 20px;
+}
+
+.notice-section {
+    background: #efeffa;
+}
+
+.notice-board {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+}
+
+.notice {
+    padding: 20px 5px;
+    border-bottom: 1px solid #eeeef2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.notice:last-child {
+    border: none;
+}
+
+.notice h3 {
+    font-size: 15px;
+    margin-bottom: 6px;
+}
+
+.notice p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.notice span {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.contact {
+    text-align: center;
+    background: var(--dark);
+    color: white;
+    padding: 70px 7%;
+}
+
+.contact p {
+    color: #b7bad0;
+    margin: 15px 0 25px;
+    line-height: 1.8;
+}
+
+footer {
+    background: #101228;
+    color: #a9abc0;
+    text-align: center;
+    padding: 25px;
+    font-size: 13px;
+}
+
+.mobile-menu {
+    display: none;
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--dark);
+}
+
+@media(max-width:950px) {
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .departments, .events {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .faculty-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:650px) {
+    .navbar {
+        padding: 18px 5%;
+    }
+
+    .mobile-menu {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 25px;
+        box-shadow: 0 10px 20px #0001;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .navbar > .btn {
+        display: none;
+    }
+
+    .hero {
+        padding: 55px 6%;
+    }
+
+    .hero-image {
+        height: 270px;
+    }
+
+    section {
+        padding: 55px 6%;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2,1fr);
+        padding: 30px 6%;
+    }
+
+    .departments, .faculty-grid, .events {
+        grid-template-columns: 1fr;
+    }
+
+    .heading h2 {
+        font-size: 28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav class="navbar">
+
+    <div class="logo">Edu<span>Core.</span></div>
+
+    <button class="mobile-menu" onclick="toggleMenu()">☰</button>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#home" onclick="closeMenu()">Home</a></li>
+        <li><a href="#departments" onclick="closeMenu()">Departments</a></li>
+        <li><a href="#faculty" onclick="closeMenu()">Faculty</a></li>
+        <li><a href="#students" onclick="closeMenu()">Students</a></li>
+        <li><a href="#events" onclick="closeMenu()">Events</a></li>
+        <li><a href="#notices" onclick="closeMenu()">Notices</a></li>
+    </ul>
+
+    <button class="btn" onclick="goContact()">Contact College</button>
+
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="home">
+
+    <div>
+        <div class="eyebrow">WELCOME TO EDUCORE UNIVERSITY</div>
+
+        <h1>Building Minds.<br><span>Creating Futures.</span></h1>
+
+        <p>
+            Discover a world of opportunities, innovation and academic excellence.
+            Explore our departments, meet our faculty and experience campus life.
+        </p>
+
+        <button class="btn" onclick="goDepartments()">Explore Departments →</button>
+
+    </div>
+
+    <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=1000" alt="University campus">
+        <div class="image-label">🎓 Excellence Through Education</div>
+    </div>
+
+</div>
+
+<!-- STATISTICS -->
+<div class="stats">
+
+    <div class="stat">
+        <strong>5,000+</strong>
+        <small>Students</small>
+    </div>
+
+    <div class="stat">
+        <strong>120+</strong>
+        <small>Faculty Members</small>
+    </div>
+
+    <div class="stat">
+        <strong>12+</strong>
+        <small>Departments</small>
+    </div>
+
+    <div class="stat">
+        <strong>95%</strong>
+        <small>Placement Rate</small>
+    </div>
+
+</div>
+
+<!-- DEPARTMENTS -->
+<section id="departments">
+
+    <div class="heading">
+        <div class="eyebrow">ACADEMIC EXCELLENCE</div>
+        <h2>Our Departments</h2>
+        <p>Explore our diverse academic programs and career opportunities.</p>
+    </div>
+
+    <div class="departments">
+
+        <div class="dept-card">
+            <div class="dept-icon">💻</div>
+            <h3>Computer Science</h3>
+            <p>Explore programming, software engineering, AI and modern computing technologies.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+        <div class="dept-card">
+            <div class="dept-icon">⚙️</div>
+            <h3>Mechanical Engineering</h3>
+            <p>Learn mechanical design, manufacturing and advanced engineering systems.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+        <div class="dept-card">
+            <div class="dept-icon">⚡</div>
+            <h3>Electrical Engineering</h3>
+            <p>Study electronics, electrical systems, circuits and power technologies.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+        <div class="dept-card">
+            <div class="dept-icon">🏗️</div>
+            <h3>Civil Engineering</h3>
+            <p>Understand infrastructure, construction and sustainable development.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+        <div class="dept-card">
+            <div class="dept-icon">📊</div>
+            <h3>Business Administration</h3>
+            <p>Develop leadership, management, marketing and business skills.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+        <div class="dept-card">
+            <div class="dept-icon">🔬</div>
+            <h3>Information Technology</h3>
+            <p>Discover networking, cloud computing, cybersecurity and digital systems.</p>
+            <a href="#contact">Explore Courses →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- FACULTY -->
+<section class="faculty-section" id="faculty">
+
+    <div class="heading">
+        <div class="eyebrow">MEET OUR TEAM</div>
+        <h2>Our Experienced Faculty</h2>
+        <p>Learn from experienced educators and industry professionals.</p>
+    </div>
+
+    <div class="faculty-grid">
+
+        <div class="faculty-card">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=500" alt="Faculty">
+            <h3>Dr. Rajesh Kumar</h3>
+            <p>Head of Computer Science</p>
+        </div>
+
+        <div class="faculty-card">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500" alt="Faculty">
+            <h3>Dr. Priya Menon</h3>
+            <p>Professor of Information Technology</p>
+        </div>
+
+        <div class="faculty-card">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=500" alt="Faculty">
+            <h3>Prof. Aravind Kumar</h3>
+            <p>Mechanical Engineering</p>
+        </div>
+
+        <div class="faculty-card">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=500" alt="Faculty">
+            <h3>Dr. Ananya Sharma</h3>
+            <p>Business Administration</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- STUDENTS -->
+<section class="students-section" id="students">
+
+    <div class="heading">
+        <div class="eyebrow">STUDENT DIRECTORY</div>
+        <h2>Our Students</h2>
+        <p>Find students and explore academic information.</p>
+    </div>
+
+    <div class="search-area">
+
+        <input type="text" id="studentSearch"
+        placeholder="Search student name or ID...">
+
+        <select id="courseFilter">
+            <option value="all">All Departments</option>
+            <option value="Computer Science">Computer Science</option>
+            <option value="Mechanical">Mechanical</option>
+            <option value="Information Technology">Information Technology</option>
+            <option value="Civil">Civil</option>
+        </select>
+
+    </div>
+
+    <div class="student-table">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Department</th>
+                    <th>Year</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentList">
+
+                <tr data-dept="Computer Science">
+                    <td>EC2026001</td>
+                    <td>Arun Kumar</td>
+                    <td>Computer Science</td>
+                    <td>II Year</td>
+                    <td><span class="status">Active</span></td>
+                </tr>
+
+                <tr data-dept="Information Technology">
+                    <td>EC2026002</td>
+                    <td>Priya Sharma</td>
+                    <td>Information Technology</td>
+                    <td>III Year</td>
+                    <td><span class="status">Active</span></td>
+                </tr>
+
+                <tr data-dept="Mechanical">
+                    <td>EC2026003</td>
+                    <td>Rahul Raj</td>
+                    <td>Mechanical</td>
+                    <td>I Year</td>
+                    <td><span class="status">Active</span></td>
+                </tr>
+
+                <tr data-dept="Civil">
+                    <td>EC2026004</td>
+                    <td>Meera Nair</td>
+                    <td>Civil</td>
+                    <td>II Year</td>
+                    <td><span class="status">Active</span></td>
+                </tr>
+
+                <tr data-dept="Computer Science">
+                    <td>EC2026005</td>
+                    <td>Karthik Raj</td>
+                    <td>Computer Science</td>
+                    <td>III Year</td>
+                    <td><span class="status">Active</span></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <p id="emptyMessage" style="display:none;text-align:center;padding:20px;color:#777b92;">
+        No students found.
+    </p>
+
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+
+    <div class="heading">
+        <div class="eyebrow">CAMPUS LIFE</div>
+        <h2>Upcoming Events</h2>
+        <p>Discover what's happening around our campus.</p>
+    </div>
+
+    <div class="events">
+
+        <div class="event-card">
+            <div class="event-date">DEC 05, 2026</div>
+            <h3>Tech Fest 2026</h3>
+            <p>A technical celebration featuring coding competitions, innovation challenges and project exhibitions.</p>
+            <button class="btn" onclick="registerEvent('Tech Fest 2026')">Register Interest</button>
+        </div>
+
+        <div class="event-card">
+            <div class="event-date">DEC 12, 2026</div>
+            <h3>Annual Sports Meet</h3>
+            <p>Experience exciting sports competitions, team activities and campus celebrations.</p>
+            <button class="btn" onclick="registerEvent('Annual Sports Meet')">Register Interest</button>
+        </div>
+
+        <div class="event-card">
+            <div class="event-date">DEC 20, 2026</div>
+            <h3>Cultural Festival</h3>
+            <p>Celebrate student creativity through music, dance, arts and cultural performances.</p>
+            <button class="btn" onclick="registerEvent('Cultural Festival')">Register Interest</button>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- NOTICE BOARD -->
+<section class="notice-section" id="notices">
+
+    <div class="heading">
+        <div class="eyebrow">LATEST UPDATES</div>
+        <h2>College Notice Board</h2>
+        <p>Stay informed about important announcements.</p>
+    </div>
+
+    <div class="notice-board">
+
+        <div class="notice">
+            <div>
+                <h3>📢 Semester Examination Schedule</h3>
+                <p>Check the examination timetable and preparation guidelines.</p>
+            </div>
+            <span>NEW</span>
+        </div>
+
+        <div class="notice">
+            <div>
+                <h3>📚 Library Registration</h3>
+                <p>Students can complete their library membership registration.</p>
+            </div>
+            <span>UPDATE</span>
+        </div>
+
+        <div class="notice">
+            <div>
+                <h3>💼 Placement Training Program</h3>
+                <p>Registration open for upcoming placement preparation sessions.</p>
+            </div>
+            <span>NEW</span>
+        </div>
+
+        <div class="notice">
+            <div>
+                <h3>🎓 Scholarship Applications</h3>
+                <p>Eligible students can check scholarship application details.</p>
+            </div>
+            <span>IMPORTANT</span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- CONTACT -->
+<div class="contact" id="contact">
+
+    <div class="eyebrow">CONNECT WITH US</div>
+
+    <h2>Start Your Journey With Us</h2>
+
+    <p>
+        Have questions about admissions, courses or campus facilities?<br>
+        Get in touch with our college administration.
+    </p>
+
+    <button class="btn" onclick="contactUs()">Contact Administration →</button>
+
+</div>
+
+<footer>
+    © 2026 EduCore University. All Rights Reserved.
+    <br><br>
+    Designed for a smarter educational experience.
+</footer>
+
+<script>
+
+// Mobile navigation
+function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+}
+
+function closeMenu() {
+    document.getElementById("navLinks").classList.remove("active");
+}
+
+// Navigation
+function goDepartments() {
+    document.getElementById("departments").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function goContact() {
+    document.getElementById("contact").scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+// Student search
+const studentSearch = document.getElementById("studentSearch");
+const courseFilter = document.getElementById("courseFilter");
+
+function filterStudents() {
+
+    const search = studentSearch.value.toLowerCase();
+    const course = courseFilter.value;
+
+    const rows = document.querySelectorAll("#studentList tr");
+
+    let visible = 0;
+
+    rows.forEach(row => {
+
+        const text = row.innerText.toLowerCase();
+        const department = row.dataset.dept;
+
+        const matchesSearch = text.includes(search);
+        const matchesCourse = course === "all" || department === course;
+
+        if(matchesSearch && matchesCourse) {
+            row.style.display = "";
+            visible++;
+        } else {
+            row.style.display = "none";
+        }
+
+    });
+
+    document.getElementById("emptyMessage").style.display =
+        visible === 0 ? "block" : "none";
+}
+
+studentSearch.addEventListener("input", filterStudents);
+courseFilter.addEventListener("change", filterStudents);
+
+// Event registration demo
+function registerEvent(eventName) {
+
+    alert(
+        "Thank you for your interest in " +
+        eventName +
+        "! Event registration is a demo feature."
+    );
+
+}
+
+// Contact demo
+function contactUs() {
+
+    alert(
+        "Welcome to EduCore! Please contact the college administration through the official college office."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
